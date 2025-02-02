@@ -23,6 +23,6 @@ The **Lucky Prize Winner Simulation System** is designed to fairly distribute pr
 git clone https://github.com/kumarchandan1997/lucky-prize-winner-event.git
 cd lucky-prize-simulation
 
-![Simulation Flowchart](public/images/Screenshot (8).png)
-![Simulation Flowchart](public/images/Screenshot (9).png)
+# ![Simulation Flowchart](public/images/Screenshot (8).png)
+# ![Simulation Flowchart](public/images/Screenshot (9).png)
 
