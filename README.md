@@ -18,9 +18,11 @@ The **Lucky Prize Winner Simulation System** is designed to fairly distribute pr
 
 ---
 
-## 🛠 Installation Guide
-
 ### Step 1: Clone the Repository
 ```bash
-git clone https://github.com/your-repo/lucky-prize-simulation.git
+git clone https://github.com/kumarchandan1997/lucky-prize-winner-event.git
 cd lucky-prize-simulation
+
+![Simulation Flowchart](public/images/Screenshot (8).png)
+![Simulation Flowchart](public/images/Screenshot (9).png)
+
