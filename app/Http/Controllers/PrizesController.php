@@ -123,7 +123,7 @@ class PrizesController extends Controller
 
         $actualRewards = [];
 
-        for ($i = 0; $i < $numberOfPrizes ?? 10; $i++) {
+        for ($i = 0; $i < $numberOfPrizes; $i++) {
 
             $selectedPrize = Prize::nextPrize();
 
@@ -135,11 +135,10 @@ class PrizesController extends Controller
 
         foreach ($actualRewards as $title => $count) {
             $totalCount = $numberOfPrizes;
-            $probability = Prize::where('title', $title)->first()->probability;
+            $probability = Prize::where('title', $title)->value('probability');
             
             $actualPercentage = ($count / $totalCount) * 100;
-            $numberOfPeople = round(($actualPercentage / 100) * $totalCount);
-            
+    
             // Store in actual_rewards table
             ActualReward::create([
                 'title' => $title,
@@ -147,14 +146,11 @@ class PrizesController extends Controller
                 'actual_percentage' => $actualPercentage,
                 'number_of_people' => $numberOfPrizes,
             ]);
-
+    
             // Update the awarded_people column in the prizes table
-            $prize = Prize::where('title', $title)->first();
-            if ($prize) {
-                $prize->awarded_people = $numberOfPeople;
-                $prize->save();
-            }
-
+            Prize::where('title', $title)->update([
+                'awarded_people' => round(($actualPercentage / 100) * $totalCount)
+            ]);
         }
 
         return to_route('prizes.index');

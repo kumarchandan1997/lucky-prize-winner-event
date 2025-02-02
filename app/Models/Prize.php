@@ -19,19 +19,18 @@ class Prize extends Model
         // TODO: Implement nextPrize() logic here.
 
         $prizes = Prize::all();
-        
         $totalProbability = $prizes->sum('probability');
-        
-        $prizeChoices = [];
-        
-        foreach ($prizes as $prize) {
-            // Add the prize to the choices array based on its probability
-            $prizeChoices = array_merge($prizeChoices, array_fill(0, round($prize->probability), $prize->id));
-        }
 
-        $selectedPrizeId = $prizeChoices[array_rand($prizeChoices)];
-        
-        return Prize::find($selectedPrizeId);
+        $randomNumber = mt_rand(1, $totalProbability * 100) / 100; 
+        $cumulativeProbability = 0;
+
+        foreach ($prizes as $prize) {
+            $cumulativeProbability += $prize->probability;
+            if ($randomNumber <= $cumulativeProbability) {
+                return $prize;
+            }
+        }
+        return $prizes->last(); 
     }
 
 }
